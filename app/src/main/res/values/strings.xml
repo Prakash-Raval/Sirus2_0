@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">Sirus 2.0</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="powered_by_brainvire">powered by Brainvire</string>
+
+    <!-- Strings for On Boarding Screen -->
+    <!--Titles-->
+    <string name="first_slide_title">Search Location</string>
+    <string name="second_slide_title">Make A Call</string>
+    <string name="third_slide_title">Add Missing Place</string>
+    <string name="fourth_slide_title">Sit Back And Enjoy</string>
+    <!--Descriptions-->
+    <string name="first_slide_desc">You can search any place nearby or with-in the specified city. We will display specific or all related shops to match your search. </string>
+    <string name="second_slide_desc">We provide almost all the numbers of all departments and shops registered with us. You can perform bookings as well.</string>
+    <string name="third_slide_desc">If you have a shop or somethings and want to be a part of our growing industry then add your place by following simple steps.</string>
+    <string name="fourth_slide_desc">We will handle everything for you. As you have the app in your pocket then you don\'t have to worry about anything.  </string>
+    <!--Buttons-->
+    <string name="skip_btn">Skip</string>
+    <string name="next_btn">Next</string>
+    <string name="let_get_started">Lets Get Started</string>
+    <string name="search">Search…</string>
+    <string name="get_a_way">Get A Way</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="hotels">Hotels</string>
+    <string name="education">Education</string>
+    <string name="shops">Shops</string>
+    <string name="featured_locations">All Featured Locations</string>
+    <string name="featured_locations_description">All the locations that are featured and have the top demands in town!</string>
+    <string name="most_viewed_locations">Most Viewed Locations</string>
+    <string name="view_all">View All</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="categories">Categories</string>
+    <string name="dashboard">DashBoard</string>
+    <string name="category">Category</string>
+    <string name="add_missing_place">Add Missing Place</string>
+    <string name="banks">Banks</string>
+    <string name="share">Share</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="profile">Profile</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="everything_your_city_holds_is_here">EveryThing Your City Holds Is Here!</string>
+    <string name="grow_your_business">Grow \nYour Business</string>
+    <string name="create_an_account">Create An Account</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="forget_password">Forget Password?</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="create_an_account_two">Create An \nAccount</string>
+    <string name="name">Name</string>
+    <string name="sign_up">Sign up</string>
+    <string name="next">Next</string>
+    <string name="car_rent">Car Rent</string>
+    <string name="expand_all">Expand All</string>
+    <string name="hospital">Hospital</string>
+    <string name="lbl_place_name">Place Name</string>
+    <string name="how_it_s_work">How It\'s Work?</string>
+    <string name="we_will_help_you_to_grow_your_business_using_online_service">We will help you to Grow your business using Online Service!</string>
+    <string name="_1_3">1/3</string>
+    <string name="username">Username</string>
+    <string name="_2_3">2/3</string>
+    <string name="choose_gender">Choose Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
+    <string name="select_your_age">Select Your Age</string>
+    <string name="_3_3">3/3</string>
+    <string name="mobile_no">Mobile No.</string>
+</resources>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/_10sdp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/_10sdp"
+        >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/mv_image"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_130sdp"
+            android:scaleType="fitXY"
+            android:src="@drawable/mac"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/mv_image"
+            tools:text="AToZ General Store"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintTop_toTopOf="@id/mv_image"
+            app:layout_constraintStart_toEndOf="@id/mv_image"
+            />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/mv_rating"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mv_title"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/mv_image"
+            android:rating="4"
+            app:layout_constraintStart_toEndOf="@id/mv_image"
+            app:layout_constraintTop_toBottomOf="@id/mv_title"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mv_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mv_rating"
+            android:layout_toEndOf="@id/mv_image"
+            android:padding="10dp"
+            app:layout_constraintStart_toEndOf="@id/mv_image"
+            app:layout_constraintTop_toBottomOf="@id/mv_rating"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="asbkd asudhlasn saudnas jasdjasl hisajdl asjdlnas" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
