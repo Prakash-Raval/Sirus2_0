@@ -443,7 +443,7 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSignUpPage3"
+                android:id="@+id/btnNext3"
                 style="@style/CustomBlackButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -461,9 +461,9 @@
                 android:text="@string/login"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_13sdp"
-                app:layout_constraintEnd_toEndOf="@id/btnSignUpPage3"
-                app:layout_constraintStart_toStartOf="@id/btnSignUpPage3"
-                app:layout_constraintTop_toBottomOf="@id/btnSignUpPage3" />
+                app:layout_constraintEnd_toEndOf="@id/btnNext3"
+                app:layout_constraintStart_toStartOf="@id/btnNext3"
+                app:layout_constraintTop_toBottomOf="@id/btnNext3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

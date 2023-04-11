@@ -26,10 +26,7 @@
     <item android:title="@string/profile">
         <menu>
             <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/menuLogin"
-                    android:icon="@drawable/ic_login"
-                    android:title="@string/login" />
+
                 <item
                     android:id="@+id/menuProfile"
                     android:icon="@drawable/ic_profile"
@@ -78,5 +75,4 @@
             </group>
         </menu>
     </item>
-
 </menu>

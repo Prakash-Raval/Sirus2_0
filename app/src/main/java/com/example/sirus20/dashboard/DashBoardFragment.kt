@@ -1,6 +1,7 @@
 package com.example.sirus20.dashboard
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,15 +9,16 @@ import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.sirus20.R
+import com.example.sirus20.addplace.model.PlaceDataModel
 import com.example.sirus20.dashboard.adapter.CategoriesAdapter
 import com.example.sirus20.dashboard.adapter.FeaturedAdapter
 import com.example.sirus20.dashboard.adapter.MostViewedAdapter
 import com.example.sirus20.dashboard.modals.CategoryData
 import com.example.sirus20.dashboard.modals.FeaturedData
-import com.example.sirus20.dashboard.modals.MostViewedData
 import com.example.sirus20.databinding.FragmentDashBoardBinding
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class DashBoardFragment : Fragment() {
 
@@ -27,6 +29,7 @@ class DashBoardFragment : Fragment() {
     private lateinit var fetAdapter: FeaturedAdapter
     private lateinit var mostAdapter: MostViewedAdapter
     private lateinit var catAdapter: CategoriesAdapter
+    private var featuredDataList = ArrayList<PlaceDataModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,8 +47,9 @@ class DashBoardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        featuredDataList.clear()
+        retrievingData()
         categoryAdapter()
-        mostViewedAdapter()
         featuredAdapter()
         openDrawer()
     }
@@ -58,9 +62,6 @@ class DashBoardFragment : Fragment() {
         val mDrawer = activity?.findViewById<DrawerLayout>(R.id.drawerLayout)
         binding.imgMenu.setOnClickListener {
             mDrawer?.openDrawer(GravityCompat.START)
-        }
-        binding.imgPlus.setOnClickListener {
-            findNavController().navigate(DashBoardFragmentDirections.actionDashBoardFragmentToIntroductionFragment2())
         }
 
     }
@@ -75,83 +76,12 @@ class DashBoardFragment : Fragment() {
         catData.add(CategoryData("Medical", R.drawable.mac))
         catData.add(CategoryData("Hospital", R.drawable.mac))
         catData.add(CategoryData("Transport", R.drawable.mac))
+        catData.add(CategoryData("Garage", R.drawable.mac))
         catAdapter = CategoriesAdapter(catData)
         binding.categoriesRecycler.adapter = catAdapter
 
     }
 
-    /*
-    * setting adapter for most viewed data
-    * */
-    private fun mostViewedAdapter() {
-        val mostData: ArrayList<MostViewedData> = ArrayList()
-        mostData.add(
-            MostViewedData(
-                R.drawable.mac,
-                "MacDonald's",
-                3.2f,
-                "hello welcome to MacDonald's hello welcome to MacDonald's hello welcome to MacDonald's "
-            )
-        )
-        mostData.add(
-            MostViewedData(
-                R.drawable.mac,
-                "MacDonald's",
-                3.2f,
-                "hello welcome to MacDonald's hello welcome to MacDonald's hello welcome to MacDonald's "
-            )
-        )
-        mostData.add(
-            MostViewedData(
-                R.drawable.mac,
-                "MacDonald's",
-                3.2f,
-                "hello welcome to MacDonald's hello welcome to MacDonald's hello welcome to MacDonald's "
-            )
-        )
-        mostData.add(
-            MostViewedData(
-                R.drawable.mac,
-                "MacDonald's",
-                3.2f,
-                "hello welcome to MacDonald's hello welcome to MacDonald's hello welcome to MacDonald's "
-            )
-        )
-        mostData.add(
-            MostViewedData(
-                R.drawable.mac,
-                "MacDonald's",
-                3.2f,
-                "hello welcome to MacDonald's hello welcome to MacDonald's hello welcome to MacDonald's "
-            )
-        )
-        mostData.add(
-            MostViewedData(
-                R.drawable.mac,
-                "MacDonald's",
-                3.2f,
-                "hello welcome to MacDonald's hello welcome to MacDonald's hello welcome to MacDonald's "
-            )
-        )
-        mostData.add(
-            MostViewedData(
-                R.drawable.mac,
-                "MacDonald's",
-                3.2f,
-                "hello welcome to MacDonald's hello welcome to MacDonald's hello welcome to MacDonald's "
-            )
-        )
-        mostData.add(
-            MostViewedData(
-                R.drawable.mac,
-                "MacDonald's",
-                3.2f,
-                "hello welcome to MacDonald's hello welcome to MacDonald's hello welcome to MacDonald's "
-            )
-        )
-        mostAdapter = MostViewedAdapter(mostData)
-        binding.mostViewedRecycler.adapter = mostAdapter
-    }
 
     /*
     * setting adapter for featured data
@@ -216,5 +146,33 @@ class DashBoardFragment : Fragment() {
         )
         fetAdapter = FeaturedAdapter(featuredData)
         binding.featuredRecycler.adapter = fetAdapter
+    }
+
+    private fun retrievingData() {
+        val db = Firebase.firestore
+
+        db.collection("PlaceDetails").get().addOnSuccessListener { documents ->
+            for (document in documents) {
+                val name = document["placeName"].toString()
+                val desc = document["placeDesc"].toString()
+                val rate = document["placeRating"].toString().toDouble()
+                val image = document["placeImage"].toString()
+                val type = document["placeType"].toString()
+                val category = document["placeCategory"].toString()
+                featuredDataList += listOf(
+                    PlaceDataModel(
+                        placeName = name,
+                        placeDesc = desc,
+                        placeType = type,
+                        placeRating = rate,
+                        placeCategory = category,
+                        placeImage = image
+                    )
+                )
+            }
+            mostAdapter = MostViewedAdapter(featuredDataList)
+            binding.mostViewedRecycler.adapter = mostAdapter
+            Log.d("FeaturedList", "retrievingData: $featuredDataList")
+        }
     }
 }

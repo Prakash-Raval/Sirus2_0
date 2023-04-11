@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "586277893537",
+    "project_id": "sirus-6b829",
+    "storage_bucket": "sirus-6b829.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586277893537:android:95ec2ad47b73cc616487e0",
+        "android_client_info": {
+          "package_name": "com.example.sirus20"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "586277893537-kg9b35ia5vm2krvjirh716e2ioa4e5fq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgnUWRgf_2Hv2P3g_lsG0oxtGCv3TgKzQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "586277893537-kg9b35ia5vm2krvjirh716e2ioa4e5fq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

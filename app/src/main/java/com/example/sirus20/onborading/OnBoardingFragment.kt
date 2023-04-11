@@ -53,14 +53,14 @@ class OnBoardingFragment : Fragment() {
     * */
     private fun buttonClicks() {
         binding.skipBtn.setOnClickListener {
-            findNavController().navigate(OnBoardingFragmentDirections.actionOnBoardingFragmentToDashBoardFragment())
+            findNavController().navigate(OnBoardingFragmentDirections.actionOnBoardingFragmentToIntroductionFragment2())
         }
         binding.nextBtn.setOnClickListener {
             binding.slider.currentItem = currentPosition.plus(1)
         }
         binding.getStartedBtn.setOnClickListener {
 
-            findNavController().navigate(OnBoardingFragmentDirections.actionOnBoardingFragmentToDashBoardFragment())
+            findNavController().navigate(OnBoardingFragmentDirections.actionOnBoardingFragmentToIntroductionFragment2())
 
         }
     }

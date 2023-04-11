@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
@@ -15,11 +16,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.example.sirus20.databinding.ActivityMainBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class MainActivity : AppCompatActivity() {
 
     /*
-    *
     * variables
     * */
     private lateinit var binding: ActivityMainBinding
@@ -31,18 +32,52 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
         setUpNavigation()
 
     }
 
-
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            binding.drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
+    /*
+        * handling onBackPress() method with drawer
+        * */
+    private val onBackPressedCallback: OnBackPressedCallback =
+        object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (pDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    pDrawerLayout.closeDrawer(GravityCompat.START)
+                } else {
+                    when (pNavController.currentDestination?.id) {
+                        R.id.dashBoardFragment -> {
+                            showAppClosingDialog()
+                        }
+                        R.id.onBoardingFragment -> {
+                            showAppClosingDialog()
+                        }
+                        R.id.introductionFragment2 -> {
+                            showAppClosingDialog()
+                        }
+                        R.id.loginFragment -> {
+                            pNavController.navigateUp()
+                        }
+                        else -> {
+                            pNavController.navigateUp()
+                        }
+                    }
+                }
+            }
         }
+
+
+    /*
+   * close app dialog
+   * */
+    private fun showAppClosingDialog() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.app_name)
+            .setMessage("Do you really want to close the app?")
+            .setPositiveButton("Yes") { _, _ -> finish() }
+            .setNegativeButton("No", null)
+            .show()
     }
 
     /*
