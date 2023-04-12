@@ -2,6 +2,7 @@ package com.example.sirus20
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
@@ -87,6 +88,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         appBarConfiguration =
             AppBarConfiguration(setOf(R.id.dashBoardFragment), pDrawerLayout)
         pNavigationView.setupWithNavController(pNavController)
+        //  pNavigationView.setNavigationItemSelectedListener(this)
         pNavigationView.setNavigationItemSelectedListener(this)
 
         pNavController.addOnDestinationChangedListener { _, destination, _ ->
@@ -101,7 +103,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     window.statusBarColor = ContextCompat.getColor(this, R.color.on_board_back)
                 }
 
-                R.id.loginFragment, R.id.signUPFragment -> {
+                R.id.loginFragment, R.id.signUPFragment,R.id.profileFragment -> {
                     hideDrawer()
                     window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
                     window.statusBarColor = ContextCompat.getColor(this, R.color.status_bar_yellow)
@@ -177,16 +179,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         })
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        item.isChecked = true
-        when (item.itemId) {
-            R.id.menuLogout -> {
-                FirebaseAuth.getInstance().signOut()
-                pNavController.navigate(R.id.action_dashBoardFragment_to_introductionFragment2)
 
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+
+            R.id.menuLogout -> {
+                Log.d("menuClicks", "onOptionsItemSelected: ${item.itemId}")
+                FirebaseAuth.getInstance().signOut()
+                pNavController.navigate(R.id.introductionFragment2)
             }
+            else -> {
+                pNavController.navigate(item.itemId)
+            }
+
         }
-        return true
+        return super.onMenuItemSelected(item.itemId, item)
     }
+
 
 }

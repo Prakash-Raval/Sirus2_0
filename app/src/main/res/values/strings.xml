@@ -81,4 +81,5 @@
     <string name="lbl_enter_valid_password">Please enter valid password</string>
     <string name="lbl_enter_mobile">Please enter mobile number</string>
     <string name="lbl_enter_valid_mobile">Please enter valid mobile number</string>
+    <string name="update">Update</string>
 </resources>

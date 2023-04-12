@@ -20,7 +20,6 @@ class AddPlaceViewModel : ViewModel() {
         mFireStore.collection("PlaceDetails")
             .document()
             .set(placeDetails, SetOptions.merge())
-
             .addOnSuccessListener {
                 response.value = ResponseHandler.OnSuccessResponse
                 Log.d("onSuccess", "addPlace:")

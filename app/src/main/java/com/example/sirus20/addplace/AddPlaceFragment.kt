@@ -17,6 +17,7 @@ import com.example.sirus20.R
 import com.example.sirus20.addplace.model.PlaceDataModel
 import com.example.sirus20.addplace.viewmodel.AddPlaceViewModel
 import com.example.sirus20.common.BaseFragment
+import com.example.sirus20.common.ImagePicker
 import com.example.sirus20.databinding.FragmentAddPlaceBinding
 import com.example.sirus20.common.ResponseHandler
 import com.example.sirus20.extension.setLocalImage
@@ -38,7 +39,7 @@ class AddPlaceFragment : BaseFragment() {
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let { imageUri ->
                 binding.imgPlace.setLocalImage(imageUri, false)
-                profileImagePath = getFileFromUri(imageUri).absolutePath
+                profileImagePath = ImagePicker.getFileFromUri(imageUri,requireContext()).absolutePath
 
             }
         }
@@ -89,22 +90,6 @@ class AddPlaceFragment : BaseFragment() {
         }
     }
 
-    /*
-    * getting url from gallery
-    * */
-    private fun getFileFromUri(uri: Uri): File {
-        val storageDir: File? =
-            requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        val file =
-            File.createTempFile("Img_", ".png", storageDir)
-        file.outputStream().use {
-            val inputStream = requireContext().contentResolver.openInputStream(uri)
-            inputStream?.copyTo(it)
-            inputStream?.close()
-        }
-
-        return file
-    }
 
     private fun getViewModel(): AddPlaceViewModel {
         viewModel = ViewModelProvider(this)[AddPlaceViewModel::class.java]
@@ -119,7 +104,7 @@ class AddPlaceFragment : BaseFragment() {
                 placeImage = profileImagePath,
                 placeCategory = binding.edtPlaceCategory.text.toString().trim(),
                 placeDesc = binding.edtPlaceDesc.text.toString().trim(),
-                placeRating = binding.edtPlaceRate.text.toString().toDouble(),
+                placeRating = binding.edtPlaceRate.text.toString().toFloat(),
                 placeType = binding.edtPlaceType.text.toString().trim(),
             )
         )

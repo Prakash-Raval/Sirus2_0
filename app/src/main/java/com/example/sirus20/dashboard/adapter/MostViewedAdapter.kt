@@ -1,48 +1,46 @@
 package com.example.sirus20.dashboard.adapter
 
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sirus20.R
 import com.example.sirus20.addplace.model.PlaceDataModel
+import com.example.sirus20.dashboard.listner.OnCellClicked
+import com.example.sirus20.databinding.ItemMostViewCardBinding
 
 
 class MostViewedAdapter(
+    val onCellClicked: OnCellClicked,
     private val userList: ArrayList<PlaceDataModel>
 ) :
     RecyclerView.Adapter<MostViewedAdapter.MyViewHolder>() {
 
-    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var image: ImageView = view.findViewById(R.id.mv_image)
-        var title: TextView = view.findViewById(R.id.mv_title)
-        var desc: TextView = view.findViewById(R.id.mv_desc)
-        var rating: RatingBar = view.findViewById(R.id.mv_rating)
+
+    inner class MyViewHolder(val binding: ItemMostViewCardBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(position: Int) {
+            binding.data = userList[position]
+            binding.root.setOnClickListener {
+                onCellClicked.onClick(userList[position])
+            }
+        }
 
     }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_most_view_card, parent, false)
-        Log.d("T12A22G22", "onBindViewHolder: $userList")
-
-        return MyViewHolder(view)
+        return MyViewHolder(
+            ItemMostViewCardBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.image.setImageURI(Uri.parse(userList[position].placeImage))
-        holder.title.text = userList[position].placeName
-        holder.desc.text = userList[position].placeDesc
-        holder.rating.rating = userList[position].placeRating?.toFloat()!!
-
-        Log.d("T12A22G22", "onBindViewHolder: $userList")
+        holder.binding.mvImage.setImageURI(Uri.parse(userList[position].placeImage))
+        holder.bind(position)
     }
 
     override fun getItemCount(): Int {

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.example.sirus20.signup.model.SignUpModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/status_bar_yellow">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:background="@drawable/image_circle"
+                android:src="@drawable/ic_person"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgBack" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_back"
+                app:layout_constraintStart_toEndOf="@id/start"
+                app:layout_constraintTop_toBottomOf="@id/top" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/_20sdp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/_20sdp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="@dimen/_20sdp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtSignUpName"
+                style="@style/TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                app:layout_constraintEnd_toStartOf="@id/end"
+                app:layout_constraintStart_toEndOf="@id/start"
+                app:layout_constraintTop_toBottomOf="@id/imgProfile">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtSignUpName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="@string/name"
+                    android:inputType="textPersonName"
+                    android:lines="1"
+                    android:text="@{data.name}"
+                    android:textCursorDrawable="@drawable/text_cursor_drawable" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtSignUpUserName"
+                style="@style/TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintEnd_toStartOf="@id/end"
+                app:layout_constraintStart_toEndOf="@id/start"
+                app:layout_constraintTop_toBottomOf="@id/txtSignUpName">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtSignUpUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="@string/username"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:text="@{data.userName}"
+                    android:textCursorDrawable="@drawable/text_cursor_drawable" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtSignUpEmail"
+                style="@style/TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintEnd_toStartOf="@id/end"
+                app:layout_constraintStart_toEndOf="@id/start"
+                app:layout_constraintTop_toBottomOf="@id/txtSignUpUserName">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtSignUpUserEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:lines="1"
+                    android:enabled="false"
+                    android:text="@{data.email}"
+                    android:textCursorDrawable="@drawable/text_cursor_drawable" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtGender2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:text="@string/choose_gender"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13sdp"
+                app:layout_constraintStart_toEndOf="@id/start"
+                app:layout_constraintTop_toBottomOf="@id/txtSignUpEmail" />
+
+            <RadioGroup
+                android:id="@+id/rgGender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:checkedButton="@{data.gender == `Male` ? @id/rdMale : data.gender == `Female` ? @id/rdFemale :@id/rdOther }"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/_20sdp"
+                app:layout_constraintEnd_toStartOf="@id/end"
+                app:layout_constraintStart_toEndOf="@id/start"
+                app:layout_constraintTop_toBottomOf="@id/txtGender2">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rdMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/black"
+                    android:checked="true"
+                    android:text="@string/male"
+                    android:textColor="@color/black" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rdFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:buttonTint="@color/black"
+                    android:text="@string/female"
+                    android:textColor="@color/black" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rdOther"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:buttonTint="@color/black"
+                    android:text="@string/other"
+                    android:textColor="@color/black" />
+
+            </RadioGroup>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@id/end"
+                app:layout_constraintStart_toEndOf="@id/start"
+                app:layout_constraintTop_toBottomOf="@id/rgGender" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:text="@string/select_your_age"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13sdp"
+                app:layout_constraintStart_toEndOf="@id/start"
+                app:layout_constraintTop_toBottomOf="@id/view" />
+
+            <DatePicker
+                android:id="@+id/datePicker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:spinnersShown="true"
+                app:layout_constraintEnd_toStartOf="@id/end"
+                app:layout_constraintStart_toEndOf="@id/start"
+                app:layout_constraintTop_toBottomOf="@id/txtDate" />
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/country_code_picker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/image_background_black"
+                android:gravity="center"
+                app:ccp_autoDetectCountry="true"
+                android:clickable="false"
+                app:ccp_showFlag="true"
+                app:ccp_showFullName="true"
+                app:ccp_showNameCode="true"
+                app:layout_constraintEnd_toStartOf="@id/end"
+                app:layout_constraintStart_toEndOf="@id/start"
+                app:layout_constraintTop_toBottomOf="@id/datePicker" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtSignUpMobile"
+                style="@style/TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintEnd_toStartOf="@id/end"
+                app:layout_constraintStart_toEndOf="@id/start"
+                app:layout_constraintTop_toBottomOf="@id/country_code_picker">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtSignUpUserMobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="@string/mobile_no"
+                    android:inputType="numberDecimal"
+                    android:enabled="false"
+                    android:lines="1"
+                    android:text="@{data.mobile}"
+                    android:textCursorDrawable="@drawable/text_cursor_drawable" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnUpdate"
+                style="@style/CustomBlackButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_30sdp"
+                android:text="@string/update"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/end"
+                app:layout_constraintStart_toEndOf="@id/start"
+                app:layout_constraintTop_toBottomOf="@id/txtSignUpMobile" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

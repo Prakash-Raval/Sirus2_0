@@ -9,18 +9,20 @@ import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.sirus20.R
 import com.example.sirus20.addplace.model.PlaceDataModel
 import com.example.sirus20.dashboard.adapter.CategoriesAdapter
 import com.example.sirus20.dashboard.adapter.FeaturedAdapter
 import com.example.sirus20.dashboard.adapter.MostViewedAdapter
+import com.example.sirus20.dashboard.listner.OnCellClicked
 import com.example.sirus20.dashboard.modals.CategoryData
 import com.example.sirus20.dashboard.modals.FeaturedData
 import com.example.sirus20.databinding.FragmentDashBoardBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class DashBoardFragment : Fragment() {
+class DashBoardFragment : Fragment(), OnCellClicked {
 
     /*
     * variables
@@ -52,6 +54,13 @@ class DashBoardFragment : Fragment() {
         categoryAdapter()
         featuredAdapter()
         openDrawer()
+        setNavigate()
+    }
+
+    private fun setNavigate() {
+        binding.layoutSearch.setOnClickListener {
+            findNavController().navigate(DashBoardFragmentDirections.actionDashBoardFragmentToSearchFragment())
+        }
     }
 
 
@@ -150,15 +159,17 @@ class DashBoardFragment : Fragment() {
 
     private fun retrievingData() {
         val db = Firebase.firestore
-
+        //getting data from firebase fire store
         db.collection("PlaceDetails").get().addOnSuccessListener { documents ->
             for (document in documents) {
                 val name = document["placeName"].toString()
                 val desc = document["placeDesc"].toString()
-                val rate = document["placeRating"].toString().toDouble()
+                val rate = document["placeRating"].toString().toFloat()
                 val image = document["placeImage"].toString()
                 val type = document["placeType"].toString()
                 val category = document["placeCategory"].toString()
+
+                //adding data to list from firebase
                 featuredDataList += listOf(
                     PlaceDataModel(
                         placeName = name,
@@ -166,13 +177,23 @@ class DashBoardFragment : Fragment() {
                         placeType = type,
                         placeRating = rate,
                         placeCategory = category,
-                        placeImage = image
+                        placeImage = image,
+                        placeId = document.id
                     )
                 )
             }
-            mostAdapter = MostViewedAdapter(featuredDataList)
+            mostAdapter = MostViewedAdapter(this, featuredDataList)
             binding.mostViewedRecycler.adapter = mostAdapter
             Log.d("FeaturedList", "retrievingData: $featuredDataList")
         }
+    }
+
+    /*
+    * getting data from recycler view
+    * */
+    override fun onClick(placeDataModel: PlaceDataModel) {
+        val bundle = Bundle()
+        bundle.putParcelable("DATA", placeDataModel)
+        findNavController().navigate(R.id.action_dashBoardFragment_to_detailsFragment, bundle)
     }
 }

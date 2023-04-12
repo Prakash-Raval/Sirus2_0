@@ -84,6 +84,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layoutSearch"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_below="@id/txtAppName"
@@ -284,9 +285,9 @@
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@id/featured_background"
                         android:background="@color/white"
-                        tools:itemCount="1"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="1"
                         tools:listitem="@layout/item_featured_card" />
 
                 </RelativeLayout>
@@ -331,11 +332,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
-                        tools:listitem="@layout/item_most_view_card"
-                        tools:itemCount="1"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:orientation="horizontal"
-                        android:layout_marginEnd="@dimen/_5sdp" />
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/item_most_view_card" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -374,10 +375,10 @@
                         android:id="@+id/categories_recycler"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:listitem="@layout/item_category_card"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         android:orientation="horizontal"
-                        tools:itemCount="1"/>
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/item_category_card" />
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
