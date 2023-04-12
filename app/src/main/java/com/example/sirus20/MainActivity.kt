@@ -2,6 +2,7 @@ package com.example.sirus20
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.OnBackPressedCallback
@@ -17,8 +18,10 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.example.sirus20.databinding.ActivityMainBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     /*
     * variables
@@ -47,17 +50,8 @@ class MainActivity : AppCompatActivity() {
                     pDrawerLayout.closeDrawer(GravityCompat.START)
                 } else {
                     when (pNavController.currentDestination?.id) {
-                        R.id.dashBoardFragment -> {
+                        R.id.dashBoardFragment, R.id.introductionFragment2, R.id.onBoardingFragment -> {
                             showAppClosingDialog()
-                        }
-                        R.id.onBoardingFragment -> {
-                            showAppClosingDialog()
-                        }
-                        R.id.introductionFragment2 -> {
-                            showAppClosingDialog()
-                        }
-                        R.id.loginFragment -> {
-                            pNavController.navigateUp()
                         }
                         else -> {
                             pNavController.navigateUp()
@@ -93,6 +87,8 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration =
             AppBarConfiguration(setOf(R.id.dashBoardFragment), pDrawerLayout)
         pNavigationView.setupWithNavController(pNavController)
+        pNavigationView.setNavigationItemSelectedListener(this)
+
         pNavController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.splashFragment -> {
@@ -105,12 +101,7 @@ class MainActivity : AppCompatActivity() {
                     window.statusBarColor = ContextCompat.getColor(this, R.color.on_board_back)
                 }
 
-                R.id.loginFragment -> {
-                    hideDrawer()
-                    window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-                    window.statusBarColor = ContextCompat.getColor(this, R.color.status_bar_yellow)
-                }
-                R.id.signUPFragment -> {
+                R.id.loginFragment, R.id.signUPFragment -> {
                     hideDrawer()
                     window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
                     window.statusBarColor = ContextCompat.getColor(this, R.color.status_bar_yellow)
@@ -147,10 +138,10 @@ class MainActivity : AppCompatActivity() {
 
         } else {
             pDrawerLayout.closeDrawer(GravityCompat.START)
-            //statusBar()
             animateDrawer()
         }
     }
+
 
     /*
     * handle the back navigation
@@ -162,6 +153,10 @@ class MainActivity : AppCompatActivity() {
         return pNavController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+
+    /*
+    * fun for drawer animation
+    * */
     private fun animateDrawer() {
         binding.drawerLayout.setScrimColor(Color.TRANSPARENT)
         binding.drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
@@ -180,6 +175,18 @@ class MainActivity : AppCompatActivity() {
                 binding.inFragment.translationX = xTranslation
             }
         })
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        item.isChecked = true
+        when (item.itemId) {
+            R.id.menuLogout -> {
+                FirebaseAuth.getInstance().signOut()
+                pNavController.navigate(R.id.action_dashBoardFragment_to_introductionFragment2)
+
+            }
+        }
+        return true
     }
 
 }

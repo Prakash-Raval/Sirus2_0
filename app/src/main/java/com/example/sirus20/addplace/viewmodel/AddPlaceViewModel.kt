@@ -4,14 +4,14 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sirus20.addplace.model.PlaceDataModel
-import com.example.sirus20.extension.ResponseHandler
+import com.example.sirus20.common.ResponseHandler
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 
 class AddPlaceViewModel : ViewModel() {
 
     private lateinit var mFireStore: FirebaseFirestore
-    var response = MutableLiveData< ResponseHandler<String>>()
+    var response = MutableLiveData<ResponseHandler<String>>()
 
     fun addPlace(placeDetails: PlaceDataModel) {
         mFireStore = FirebaseFirestore.getInstance()

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
     app:startDestination="@id/splashFragment">
-
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.example.sirus20.spalsh.SplashFragment"
@@ -14,6 +13,9 @@
             app:destination="@id/onBoardingFragment"
             app:popUpTo="@id/main_nav_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_dashBoardFragment"
+            app:destination="@id/dashBoardFragment" />
     </fragment>
     <fragment
         android:id="@+id/onBoardingFragment"
@@ -23,15 +25,20 @@
         <action
             android:id="@+id/action_onBoardingFragment_to_introductionFragment2"
             app:destination="@id/introductionFragment2"
-            app:popUpToInclusive="true"
             app:popUpTo="@id/introductionFragment2"
-            />
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/dashBoardFragment"
         android:name="com.example.sirus20.dashboard.DashBoardFragment"
         android:label="fragment_dash_board"
-        tools:layout="@layout/fragment_dash_board"/>
+        tools:layout="@layout/fragment_dash_board">
+        <action
+            android:id="@+id/action_dashBoardFragment_to_introductionFragment2"
+            app:destination="@id/introductionFragment2"
+            app:popUpTo="@id/introductionFragment2"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.example.sirus20.category.CategoryFragment"
@@ -44,7 +51,7 @@
     <fragment
         android:id="@+id/introductionFragment2"
         android:name="com.example.sirus20.intro.IntroductionFragment"
-        android:label="IntroductionFragment" >
+        android:label="IntroductionFragment">
         <action
             android:id="@+id/action_introductionFragment2_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -55,23 +62,25 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.sirus20.login.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment">
         <action
             android:id="@+id/action_loginFragment_to_signUPFragment"
             app:destination="@id/signUPFragment" />
         <action
             android:id="@+id/action_loginFragment_to_dashBoardFragment"
+            app:destination="@id/dashBoardFragment"
             app:popUpTo="@id/main_nav_graph"
-            app:popUpToInclusive="true"
-            app:destination="@id/dashBoardFragment" />
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/signUPFragment"
         android:name="com.example.sirus20.signup.SignUPFragment"
         android:label="fragment_sign_u_p"
-        tools:layout="@layout/fragment_sign_u_p" >
+        tools:layout="@layout/fragment_sign_u_p">
         <action
             android:id="@+id/action_signUPFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

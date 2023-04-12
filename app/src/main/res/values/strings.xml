@@ -73,4 +73,12 @@
     <string name="description">Description</string>
     <string name="place_category">Place Category</string>
     <string name="submit">Submit</string>
+    <string name="lbl_enter_name">Please enter name</string>
+    <string name="lbl_enter_usen_name">Please enter user name</string>
+    <string name="lbl_enter_email">Please enter email</string>
+    <string name="lbl_enter_valid_email">Please enter valid email</string>
+    <string name="lbl_enter_password">Please enter password</string>
+    <string name="lbl_enter_valid_password">Please enter valid password</string>
+    <string name="lbl_enter_mobile">Please enter mobile number</string>
+    <string name="lbl_enter_valid_mobile">Please enter valid mobile number</string>
 </resources>

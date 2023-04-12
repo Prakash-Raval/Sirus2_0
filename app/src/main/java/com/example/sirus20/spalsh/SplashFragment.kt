@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.sirus20.R
 import com.example.sirus20.databinding.FragmentSplashBinding
+import com.example.sirus20.firebase.FireStoreClass
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -46,7 +47,12 @@ class SplashFragment : Fragment() {
     * loading up fragment
     * */
     private fun loadFragment() {
-        findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToOnBoardingFragment())
+        val currentUser = FireStoreClass().getCurrentUserID()
+        if (currentUser.isNotEmpty()) {
+            findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToDashBoardFragment())
+        } else {
+            findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToOnBoardingFragment())
+        }
     }
 
     /*
@@ -55,7 +61,6 @@ class SplashFragment : Fragment() {
     private fun setupAnim() {
         val side = AnimationUtils.loadAnimation(requireContext(), R.anim.side_anim)
         val bottom = AnimationUtils.loadAnimation(requireContext(), R.anim.bootm_anim)
-
         binding.imgLogo.animation = side
         binding.txtSlogan.animation = bottom
     }

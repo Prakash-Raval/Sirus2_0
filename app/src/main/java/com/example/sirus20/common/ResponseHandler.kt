@@ -1,4 +1,4 @@
-package com.example.sirus20.extension
+package com.example.sirus20.common
 
 sealed class ResponseHandler<out T> {
     object Loading : ResponseHandler<Nothing>()

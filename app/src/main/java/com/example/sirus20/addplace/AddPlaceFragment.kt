@@ -18,7 +18,7 @@ import com.example.sirus20.addplace.model.PlaceDataModel
 import com.example.sirus20.addplace.viewmodel.AddPlaceViewModel
 import com.example.sirus20.common.BaseFragment
 import com.example.sirus20.databinding.FragmentAddPlaceBinding
-import com.example.sirus20.extension.ResponseHandler
+import com.example.sirus20.common.ResponseHandler
 import com.example.sirus20.extension.setLocalImage
 import java.io.File
 
