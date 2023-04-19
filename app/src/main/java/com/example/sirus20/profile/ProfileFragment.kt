@@ -102,6 +102,7 @@ class ProfileFragment : BaseFragment() {
             storageRef.child("upload/$sd").downloadUrl.addOnSuccessListener {
 
                 profileImagePath = it.toString()
+                Log.d("TAG", "addImageToStorage: ${it.toString()}")
 
             }.addOnFailureListener {
 
@@ -153,7 +154,7 @@ class ProfileFragment : BaseFragment() {
             }
             else -> {
 
-                var gender = ""
+                var gender = "Male"
                 binding.rgGender.setOnCheckedChangeListener { group, checkedId ->
                     val radioButton = group.findViewById(checkedId) as RadioButton
                     gender = radioButton.text.toString()

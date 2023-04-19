@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sirus20.chat.listner.OnChatClick
 import com.example.sirus20.databinding.ItemChatLayoutBinding
 import com.example.sirus20.signup.model.SignUpModel
-import com.google.firebase.auth.FirebaseAuth
 
 
 class ChatListAdapter(
@@ -21,16 +20,13 @@ class ChatListAdapter(
         fun bind(position: Int) {
             binding.data = userList[position]
             binding.root.setOnClickListener {
-                userList[position].name?.let { it1 ->
-                    userList[position].uid?.let { it2 ->
-                        userList[position].token?.let { it3 ->
-                            onChatClick.onClick(
-                                it1,
-                                it2, token = it3
-                            )
-                        }
-                    }
-                }
+                onChatClick.onClick(
+                    name = userList[position].name ?: "",
+                    uid = userList[position].uid ?: "",
+                    token = userList[position].token ?: "",
+                    image = userList[position].image ?: ""
+                )
+
             }
         }
 

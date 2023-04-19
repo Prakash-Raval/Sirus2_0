@@ -200,4 +200,6 @@ class DashBoardFragment : Fragment(), OnCellClicked {
         bundle.putParcelable("DATA", placeDataModel)
         findNavController().navigate(R.id.action_dashBoardFragment_to_detailsFragment, bundle)
     }
+
+
 }

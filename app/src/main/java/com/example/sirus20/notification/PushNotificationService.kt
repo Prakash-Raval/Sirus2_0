@@ -6,12 +6,12 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.sirus20.MainActivity
 import com.example.sirus20.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import timber.log.Timber
 
 
 class PushNotificationService : FirebaseMessagingService() {
@@ -19,7 +19,7 @@ class PushNotificationService : FirebaseMessagingService() {
 
     override fun onNewToken(p0: String) {
         super.onNewToken(p0)
-        Log.d("TAG", "onNewToken:$p0 ")
+        Timber.d("TAG onNewToken:$p0 ")
         // token = p0
         val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE).edit()
         sharedPreferences.putString("TOKEN", p0).apply()
@@ -32,15 +32,15 @@ class PushNotificationService : FirebaseMessagingService() {
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notificationId = p0.notification?.channelId?.toInt()
 
-        Log.d("TAG33", "onMessageReceived: ${p0.notification?.body}")
-        Log.d("TAG33", "onMessageReceived: ${p0.notification?.title}")
+        Timber.d("TAG33 ${p0.notification?.body}")
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(
             this,
             0,
             intent,
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_ONE_SHOT else PendingIntent.FLAG_ONE_SHOT
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_ONE_SHOT else PendingIntent.FLAG_ONE_SHOT
         )
 
         val builder: NotificationCompat.Builder =
@@ -56,10 +56,6 @@ class PushNotificationService : FirebaseMessagingService() {
 
 
     }
-
-
-
-
 
 
     /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

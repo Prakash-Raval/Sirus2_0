@@ -1,6 +1,7 @@
 package com.example.sirus20.chat
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -71,6 +72,7 @@ class ChatFragment : Fragment(), OnChatClick {
                 }
 
             }
+            Log.d("TAG", "getUsers: $featuredDataList")
             adapter = ChatListAdapter(featuredDataList, this)
             binding.rvChat.adapter = adapter
         }
@@ -79,11 +81,12 @@ class ChatFragment : Fragment(), OnChatClick {
     /*
     * adapter click
     * */
-    override fun onClick(name: String, uid: String,token : String) {
+    override fun onClick(name: String, uid: String,token : String, image : String) {
         val bundle = Bundle()
         bundle.putString("NAME", name)
         bundle.putString("UID", uid)
         bundle.putString("TOKEN",token)
+        bundle.putString("IMAGE",image)
         findNavController().navigate(R.id.action_chatFragment_to_messagesFragment, bundle)
     }
 
