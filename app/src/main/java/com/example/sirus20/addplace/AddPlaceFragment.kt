@@ -2,7 +2,6 @@ package com.example.sirus20.addplace
 
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,10 +17,11 @@ import com.example.sirus20.addplace.model.PlaceDataModel
 import com.example.sirus20.addplace.viewmodel.AddPlaceViewModel
 import com.example.sirus20.common.BaseFragment
 import com.example.sirus20.common.ImagePicker
-import com.example.sirus20.databinding.FragmentAddPlaceBinding
 import com.example.sirus20.common.ResponseHandler
+import com.example.sirus20.databinding.FragmentAddPlaceBinding
 import com.example.sirus20.extension.setLocalImage
-import java.io.File
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 
 class AddPlaceFragment : BaseFragment() {
@@ -39,8 +39,7 @@ class AddPlaceFragment : BaseFragment() {
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let { imageUri ->
                 binding.imgPlace.setLocalImage(imageUri, false)
-                profileImagePath = ImagePicker.getFileFromUri(imageUri,requireContext()).absolutePath
-
+                addImageToStorage(imageUri)
             }
         }
 
@@ -65,6 +64,25 @@ class AddPlaceFragment : BaseFragment() {
         pickImage()
         callApiButton()
     }
+
+    private fun addImageToStorage(uri: Uri) {
+        val storageRef = Firebase.storage.reference
+        val sd = ImagePicker.getFileName(requireContext(), uri)
+        Log.d("Firebase", "addImageToStorage: $sd")
+        val uploadTask = storageRef.child("uploadPlace/$sd").putFile(uri)
+        uploadTask.addOnSuccessListener {
+            storageRef.child("uploadPlace/$sd").downloadUrl.addOnSuccessListener {
+
+                profileImagePath = it.toString()
+
+            }.addOnFailureListener {
+
+            }
+        }.addOnFailureListener {
+
+        }
+    }
+
 
     /*
     * setting up toolbar

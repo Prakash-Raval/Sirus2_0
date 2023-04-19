@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "586277893537",
+    "firebase_url": "https://sirus-6b829-default-rtdb.firebaseio.com",
     "project_id": "sirus-6b829",
     "storage_bucket": "sirus-6b829.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "586277893537-4emqmrqv9jd89vsab3tr2dm5llv5a0uo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sirus20",
+            "certificate_hash": "9c16aaad5beadabd34fee8c3041f23514f31da62"
+          }
+        },
         {
           "client_id": "586277893537-kg9b35ia5vm2krvjirh716e2ioa4e5fq.apps.googleusercontent.com",
           "client_type": 3

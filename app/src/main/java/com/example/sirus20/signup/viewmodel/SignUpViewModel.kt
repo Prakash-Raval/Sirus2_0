@@ -1,5 +1,6 @@
 package com.example.sirus20.signup.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sirus20.common.ResponseHandler
@@ -22,6 +23,7 @@ class SignUpViewModel : ViewModel() {
     }
 
     fun getSignUpData(signUpModel: SignUpModel) {
+
         response.value = ResponseHandler.Loading
         signUpModel.email?.let {
             signUpModel.password?.let { it1 ->
@@ -33,8 +35,13 @@ class SignUpViewModel : ViewModel() {
                             registerUser(signUpModel)
                             response.value = ResponseHandler.OnSuccessResponse
                         } else {
+
+
                             response.value = ResponseHandler.OnFailed
                         }
+                    }
+                    ?.addOnFailureListener {
+                        Log.d("TAGff", "getSignUpData: ${it.message}")
                     }
             }
         }
@@ -48,9 +55,11 @@ class SignUpViewModel : ViewModel() {
             ?.set(signUpModel, SetOptions.merge())
             ?.addOnSuccessListener {
                 response.value = ResponseHandler.OnSuccessResponse
+                Log.d("TAGS", "registerUser: $it")
 
             }
             ?.addOnFailureListener {
+                Log.d("TAGERROR", "registerUser: ${it.message}")
                 response.value = ResponseHandler.OnFailed
             }
     }

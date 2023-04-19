@@ -6,7 +6,12 @@ data class SignUpModel(
     var email: String? = "",
     var password: String? = "",
     var countryCode: String? = "",
-    var dateOfBirth: String? = "",
+    var day: Long? = null,
+    var month: Long? = null,
+    var year: Long? = null,
     var gender: String? = "",
     var mobile: String? = "",
+    var image: String? = "",
+    var uid: String? = "",
+    var token: String? = ""
 )

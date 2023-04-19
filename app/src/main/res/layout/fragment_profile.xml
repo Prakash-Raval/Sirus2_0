@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
 
@@ -28,7 +29,9 @@
                 android:src="@drawable/ic_person"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imgBack" />
+                app:layout_constraintTop_toBottomOf="@id/imgBack"
+                bind:image="@{data.image}"
+                bind:placeholder="@{@drawable/ic_person}" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgBack"
@@ -120,10 +123,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/_10sdp"
+                    android:enabled="false"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
                     android:lines="1"
-                    android:enabled="false"
                     android:text="@{data.email}"
                     android:textCursorDrawable="@drawable/text_cursor_drawable" />
 
@@ -145,7 +148,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:checkedButton="@{data.gender == `Male` ? @id/rdMale : data.gender == `Female` ? @id/rdFemale :@id/rdOther }"
                 android:orientation="horizontal"
                 android:paddingHorizontal="@dimen/_20sdp"
                 app:layout_constraintEnd_toStartOf="@id/end"
@@ -157,7 +159,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/black"
-                    android:checked="true"
+                    android:checked="@{data.gender.equals(`Male`) ? true : false}"
                     android:text="@string/male"
                     android:textColor="@color/black" />
 
@@ -167,6 +169,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_20sdp"
                     android:buttonTint="@color/black"
+                    android:checked="@{data.gender.equals(`Female`) ? true : false}"
                     android:text="@string/female"
                     android:textColor="@color/black" />
 
@@ -176,6 +179,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_20sdp"
                     android:buttonTint="@color/black"
+                    android:checked="@{data.gender.equals(`Other`) ? true : false}"
                     android:text="@string/other"
                     android:textColor="@color/black" />
 
@@ -221,9 +225,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:background="@drawable/image_background_black"
+                android:clickable="false"
                 android:gravity="center"
                 app:ccp_autoDetectCountry="true"
-                android:clickable="false"
                 app:ccp_showFlag="true"
                 app:ccp_showFullName="true"
                 app:ccp_showNameCode="true"
@@ -246,9 +250,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/_10sdp"
+                    android:enabled="false"
                     android:hint="@string/mobile_no"
                     android:inputType="numberDecimal"
-                    android:enabled="false"
                     android:lines="1"
                     android:text="@{data.mobile}"
                     android:textCursorDrawable="@drawable/text_cursor_drawable" />

@@ -24,8 +24,8 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/mv_image"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="@dimen/_130sdp"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_100sdp"
                 android:scaleType="fitXY"
                 android:src="@drawable/mac"
                 app:layout_constraintStart_toStartOf="parent"

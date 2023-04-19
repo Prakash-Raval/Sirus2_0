@@ -61,6 +61,9 @@ class DashBoardFragment : Fragment(), OnCellClicked {
         binding.layoutSearch.setOnClickListener {
             findNavController().navigate(DashBoardFragmentDirections.actionDashBoardFragmentToSearchFragment())
         }
+        binding.imgPlus.setOnClickListener {
+            findNavController().navigate(DashBoardFragmentDirections.actionDashBoardFragmentToChatFragment())
+        }
     }
 
 
@@ -160,7 +163,8 @@ class DashBoardFragment : Fragment(), OnCellClicked {
     private fun retrievingData() {
         val db = Firebase.firestore
         //getting data from firebase fire store
-        db.collection("PlaceDetails").get().addOnSuccessListener { documents ->
+        db.collection("PlaceDetails").get().addOnSuccessListener {
+                documents ->
             for (document in documents) {
                 val name = document["placeName"].toString()
                 val desc = document["placeDesc"].toString()

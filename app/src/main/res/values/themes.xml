@@ -29,6 +29,19 @@
         <item name="boxStrokeWidth">@dimen/_2sdp</item>
         <item name="hintTextColor">@color/black</item>
 
+    </style>// style for TextInputLayout
+
+    <style name="YellowTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColorHint">@color/status_bar_yellow</item>
+        <item name="boxBackgroundMode">outline</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/_10sdp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/_10sdp</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/_10sdp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/_10sdp</item>
+        <item name="boxStrokeColor">#fece2f</item>
+        <item name="boxStrokeWidth">@dimen/_2sdp</item>
+        <item name="hintTextColor">@color/status_bar_yellow</item>
+
     </style>
 
     <style name="CustomBlackButton" parent="Widget.MaterialComponents.Button">

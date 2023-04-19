@@ -1,11 +1,11 @@
 package com.example.sirus20.signup
 
+import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -13,11 +13,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.sirus20.R
 import com.example.sirus20.common.BaseFragment
+import com.example.sirus20.common.ResponseHandler
 import com.example.sirus20.common.Validation
 import com.example.sirus20.databinding.FragmentSignUPBinding
-import com.example.sirus20.common.ResponseHandler
 import com.example.sirus20.signup.model.SignUpModel
 import com.example.sirus20.signup.viewmodel.SignUpViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 
 class SignUPFragment : BaseFragment() {
@@ -130,22 +131,21 @@ class SignUPFragment : BaseFragment() {
     * */
     private fun getFireBaseData() {
         val userData = SignUpModel()
-        var text = ""
-        binding.rgGender.setOnCheckedChangeListener { group, checkedId ->
-            val radioButton = group.findViewById<View>(checkedId) as RadioButton
-            text = radioButton.text.toString()
+        val sh = activity?.getSharedPreferences("MySharedPref", MODE_PRIVATE)
 
-        }
+        userData.token = sh?.getString("TOKEN", "")
         userData.name = binding.edtSignUpName.text.toString().trim()
         userData.userName = binding.edtSignUpUserName.text.toString().trim()
         userData.email = binding.edtSignUpUserEmail.text.toString().trim()
         userData.password = binding.edtSignUpUserPassward.text.toString().trim()
-        userData.gender = text
-        userData.dateOfBirth = binding.datePicker.dayOfMonth.toString() + "/" +
-                binding.datePicker.month.toString() + "/" +
-                binding.datePicker.year.toString()
+        userData.gender = "Male"
+        userData.day = binding.datePicker.dayOfMonth.toLong()
+        userData.month = (binding.datePicker.month + 1).toLong()
+        userData.year = binding.datePicker.year.toLong()
         userData.countryCode = binding.countryCodePicker.selectedCountryCode
         userData.mobile = binding.edtSignUpUserMobile.text.toString().trim()
+        userData.uid = FirebaseAuth.getInstance().uid
+
         viewModel.getSignUpData(
             userData
         )
@@ -157,7 +157,7 @@ class SignUPFragment : BaseFragment() {
     * setting up observer
     * */
 
-    private fun setObserver(){
+    private fun setObserver() {
         viewModel.response.observe(viewLifecycleOwner, Observer { state ->
             if (state == null) {
                 return@Observer

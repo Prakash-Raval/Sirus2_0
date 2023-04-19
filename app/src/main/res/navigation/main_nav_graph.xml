@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_dashBoardFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_dashBoardFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
@@ -101,4 +104,16 @@
         android:id="@+id/searchFragment"
         android:name="com.example.sirus20.search.SearchFragment"
         android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.sirus20.chat.ChatFragment"
+        android:label="ChatFragment" >
+        <action
+            android:id="@+id/action_chatFragment_to_messagesFragment"
+            app:destination="@id/messagesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/messagesFragment"
+        android:name="com.example.sirus20.message.MessagesFragment"
+        android:label="MessagesFragment" />
 </navigation>
