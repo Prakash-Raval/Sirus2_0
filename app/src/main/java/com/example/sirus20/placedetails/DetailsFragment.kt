@@ -72,28 +72,26 @@ class DetailsFragment : Fragment() {
     private fun deleteData(model: PlaceDataModel) {
 
 
-        model.placeId?.let {
-            mFirebaseDatabaseInstance
-                .collection("PlaceDetails")
-                .document(it)
-                .delete()
-                .addOnSuccessListener {
-                    Toast.makeText(
-                        requireContext(),
-                        "Successfully deleted data",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    findNavController().navigateUp()
+        mFirebaseDatabaseInstance
+            .collection("PlaceDetails")
+            .document(model.placeId ?: "")
+            .delete()
+            .addOnSuccessListener {
+                Toast.makeText(
+                    requireContext(),
+                    "Successfully deleted data",
+                    Toast.LENGTH_SHORT
+                ).show()
+                findNavController().navigateUp()
 
-                }
-                .addOnFailureListener {
-                    Toast.makeText(
-                        requireContext(),
-                        "Unable to delete data",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-        }
+            }
+            .addOnFailureListener {
+                Toast.makeText(
+                    requireContext(),
+                    "Unable to delete data",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
     }
 
 

@@ -1,7 +1,6 @@
 package com.example.sirus20.dashboard
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +20,7 @@ import com.example.sirus20.dashboard.modals.FeaturedData
 import com.example.sirus20.databinding.FragmentDashBoardBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import timber.log.Timber
 
 class DashBoardFragment : Fragment(), OnCellClicked {
 
@@ -160,11 +160,13 @@ class DashBoardFragment : Fragment(), OnCellClicked {
         binding.featuredRecycler.adapter = fetAdapter
     }
 
+    /*
+    * retrieving data from firebase
+    * */
     private fun retrievingData() {
         val db = Firebase.firestore
         //getting data from firebase fire store
-        db.collection("PlaceDetails").get().addOnSuccessListener {
-                documents ->
+        db.collection("PlaceDetails").get().addOnSuccessListener { documents ->
             for (document in documents) {
                 val name = document["placeName"].toString()
                 val desc = document["placeDesc"].toString()
@@ -188,7 +190,7 @@ class DashBoardFragment : Fragment(), OnCellClicked {
             }
             mostAdapter = MostViewedAdapter(this, featuredDataList)
             binding.mostViewedRecycler.adapter = mostAdapter
-            Log.d("FeaturedList", "retrievingData: $featuredDataList")
+            Timber.d("FeaturedList retrievingData: $featuredDataList")
         }
     }
 

@@ -2,7 +2,6 @@ package com.example.sirus20
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
@@ -103,7 +102,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     window.statusBarColor = ContextCompat.getColor(this, R.color.on_board_back)
                 }
 
-                R.id.loginFragment, R.id.signUPFragment,R.id.profileFragment -> {
+                R.id.loginFragment, R.id.signUPFragment, R.id.profileFragment -> {
                     hideDrawer()
                     window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
                     window.statusBarColor = ContextCompat.getColor(this, R.color.status_bar_yellow)
@@ -180,19 +179,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
 
-
+    /*
+    * handling logout click from drawer
+    * */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
 
             R.id.menuLogout -> {
-                Log.d("menuClicks", "onOptionsItemSelected: ${item.itemId}")
                 FirebaseAuth.getInstance().signOut()
                 pNavController.navigate(R.id.introductionFragment2)
             }
             else -> {
                 pNavController.navigate(item.itemId)
             }
-
         }
         return super.onMenuItemSelected(item.itemId, item)
     }

@@ -115,5 +115,28 @@
     <fragment
         android:id="@+id/messagesFragment"
         android:name="com.example.sirus20.message.MessagesFragment"
-        android:label="MessagesFragment" />
+        android:label="MessagesFragment" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.sirus20.user.UserFragment"
+        android:label="UserFragment" >
+        <action
+            android:id="@+id/action_userFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.example.sirus20.userDetail.UserDetailFragment"
+        android:label="fragment_user_detail"
+        tools:layout="@layout/fragment_user_detail" >
+        <action
+            android:id="@+id/action_userDetailFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userInfoFragment"
+        android:name="com.example.sirus20.userInfo.UserInfoFragment"
+        android:label="UserInfoFragment" />
 </navigation>

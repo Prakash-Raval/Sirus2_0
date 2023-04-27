@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -63,5 +64,12 @@
         <item name="android:paddingTop">@dimen/_8sdp</item>
         <item name="android:paddingBottom">@dimen/_8sdp</item>
 
+    </style>
+
+
+    <style name="focusInClick">
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
     </style>
 </resources>

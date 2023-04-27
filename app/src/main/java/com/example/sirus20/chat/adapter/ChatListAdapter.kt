@@ -21,10 +21,7 @@ class ChatListAdapter(
             binding.data = userList[position]
             binding.root.setOnClickListener {
                 onChatClick.onClick(
-                    name = userList[position].name ?: "",
-                    uid = userList[position].uid ?: "",
-                    token = userList[position].token ?: "",
-                    image = userList[position].image ?: ""
+                    userList[position]
                 )
 
             }

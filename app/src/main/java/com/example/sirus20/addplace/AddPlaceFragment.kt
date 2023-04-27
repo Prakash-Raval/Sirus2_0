@@ -2,7 +2,6 @@ package com.example.sirus20.addplace
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +21,7 @@ import com.example.sirus20.databinding.FragmentAddPlaceBinding
 import com.example.sirus20.extension.setLocalImage
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import timber.log.Timber
 
 
 class AddPlaceFragment : BaseFragment() {
@@ -65,20 +65,29 @@ class AddPlaceFragment : BaseFragment() {
         callApiButton()
     }
 
+
+    /*
+    * adding image to fireBase Storage
+    * */
     private fun addImageToStorage(uri: Uri) {
         val storageRef = Firebase.storage.reference
+        //stored image name
         val sd = ImagePicker.getFileName(requireContext(), uri)
-        Log.d("Firebase", "addImageToStorage: $sd")
+        Timber.d("Firebase addImageToStorage: $sd")
+
+        //putting file to storage
         val uploadTask = storageRef.child("uploadPlace/$sd").putFile(uri)
         uploadTask.addOnSuccessListener {
+            //download url from firebase
             storageRef.child("uploadPlace/$sd").downloadUrl.addOnSuccessListener {
 
                 profileImagePath = it.toString()
 
             }.addOnFailureListener {
-
+                Timber.d("TAG $it")
             }
         }.addOnFailureListener {
+            Timber.d("TAG $it")
 
         }
     }
@@ -108,7 +117,9 @@ class AddPlaceFragment : BaseFragment() {
         }
     }
 
-
+    /*
+    * init view model
+    * */
     private fun getViewModel(): AddPlaceViewModel {
         viewModel = ViewModelProvider(this)[AddPlaceViewModel::class.java]
         return viewModel
@@ -116,6 +127,8 @@ class AddPlaceFragment : BaseFragment() {
 
     private fun getFireBaseCall() {
         viewModel = getViewModel()
+
+        //request data to view model
         viewModel.addPlace(
             PlaceDataModel(
                 placeName = binding.edtPlaceName.text.toString().trim(),
@@ -127,6 +140,11 @@ class AddPlaceFragment : BaseFragment() {
             )
         )
 
+
+        /*
+        *
+        * observing data from view model
+        * */
         viewModel.response.observe(viewLifecycleOwner, Observer { state ->
             if (state == null) {
                 return@Observer
@@ -134,16 +152,16 @@ class AddPlaceFragment : BaseFragment() {
             when (state) {
                 is ResponseHandler.Loading -> {
                     showProgressDialog()
-                    Log.d("AddPlaceFragment", "setObserverData: $state")
+                    Timber.d("AddPlaceFragment setObserverData: $state")
                 }
                 is ResponseHandler.OnFailed -> {
-                    Log.d("AddPlaceFragment", "setObserverData: $state")
+                    Timber.d("AddPlaceFragment setObserverData: $state")
                     hideProgressBar()
                     Toast.makeText(requireContext(), "Failed to add data.", Toast.LENGTH_SHORT)
                         .show()
                 }
                 is ResponseHandler.OnSuccessResponse -> {
-                    Log.d("AddPlaceFragment", "setObserverData: $state")
+                    Timber.d("AddPlaceFragment setObserverData: $state")
                     hideProgressBar()
                     Toast.makeText(requireContext(), "Data added Successfully.", Toast.LENGTH_SHORT)
                         .show()

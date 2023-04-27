@@ -3,7 +3,6 @@ package com.example.sirus20.profile
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import timber.log.Timber
 
 
 class ProfileFragment : BaseFragment() {
@@ -102,7 +102,7 @@ class ProfileFragment : BaseFragment() {
             storageRef.child("upload/$sd").downloadUrl.addOnSuccessListener {
 
                 profileImagePath = it.toString()
-                Log.d("TAG", "addImageToStorage: ${it.toString()}")
+                Timber.d("TAG  addImageToStorage: $it")
 
             }.addOnFailureListener {
 
@@ -160,31 +160,30 @@ class ProfileFragment : BaseFragment() {
                     gender = radioButton.text.toString()
                 }
 
-                if (profileImagePath == ""){
+                if (profileImagePath == "") {
                     profileImagePath = imageUrl
-                }
-                else{
+                } else {
                     addImageToStorage(uri)
                 }
                 val sh = activity?.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
-                val token = sh?.getString("TOKEN","")
-                    viewModel.updateUser(
-                        SignUpModel(
-                            name = binding.edtSignUpName.text.toString().trim(),
-                            email = binding.edtSignUpUserEmail.text.toString().trim(),
-                            mobile = binding.edtSignUpUserMobile.text.toString().trim(),
-                            userName = binding.edtSignUpUserName.text.toString().trim(),
-                            day = binding.datePicker.dayOfMonth.toLong(),
-                            month = binding.datePicker.month.toLong(),
-                            year = binding.datePicker.year.toLong(),
-                            gender = gender,
-                            countryCode = binding.countryCodePicker.selectedCountryCode,
-                            image = profileImagePath,
-                            uid = id.toString(),
-                            token = token,
-                            password = password
-                        ), id.toString()
-                    )
+                val token = sh?.getString("TOKEN", "")
+                viewModel.updateUser(
+                    SignUpModel(
+                        name = binding.edtSignUpName.text.toString().trim(),
+                        email = binding.edtSignUpUserEmail.text.toString().trim(),
+                        mobile = binding.edtSignUpUserMobile.text.toString().trim(),
+                        userName = binding.edtSignUpUserName.text.toString().trim(),
+                        day = binding.datePicker.dayOfMonth.toLong(),
+                        month = binding.datePicker.month.toLong(),
+                        year = binding.datePicker.year.toLong(),
+                        gender = gender,
+                        countryCode = binding.countryCodePicker.selectedCountryCode,
+                        image = profileImagePath,
+                        uid = id.toString(),
+                        token = token,
+                        password = password
+                    ), id.toString()
+                )
                 setObserver()
             }
         }
@@ -201,16 +200,16 @@ class ProfileFragment : BaseFragment() {
             when (state) {
                 is ResponseHandler.Loading -> {
                     showProgressDialog()
-                    Log.d("AddPlaceFragment", "setObserverData: $state")
+                    Timber.d("AddPlaceFragment  setObserverData: $state")
                 }
                 is ResponseHandler.OnFailed -> {
-                    Log.d("AddPlaceFragment", "setObserverData: $state")
+                    Timber.d("AddPlaceFragment setObserverData: $state")
                     hideProgressBar()
                     Toast.makeText(requireContext(), "Failed to update data.", Toast.LENGTH_SHORT)
                         .show()
                 }
                 is ResponseHandler.OnSuccessResponse -> {
-                    Log.d("AddPlaceFragment", "setObserverData: $state")
+                    Timber.d("AddPlaceFragment  setObserverData: $state")
                     hideProgressBar()
                     Toast.makeText(
                         requireContext(),
@@ -230,6 +229,9 @@ class ProfileFragment : BaseFragment() {
     private fun getUpdateData() {
 
 
+        /*
+        * getting data from USER document
+        * */
         fireStore
             .collection("USER")
             .document(id.toString())
@@ -250,17 +252,12 @@ class ProfileFragment : BaseFragment() {
                 /*
                 * setting up date in date picker
                 * */
-                val day = document.get("day") as Long?
-                val month = document.get("month") as Long?
-                val year = document.get("year") as Long?
+                val day = (document.get("day") as Long?)?.toInt()
+                val month = (document.get("month") as Long?)?.toInt()
+                val year = (document.get("year") as Long?)?.toInt()
 
-                year?.toInt()?.let {
-                    month?.toInt()
-                        ?.let { it1 ->
-                            day?.toInt()
-                                ?.let { it2 -> binding.datePicker.init(it, it1, it2, null) }
-                        }
-                }
+                binding.datePicker.init(year ?: 1999, month ?: 8, day ?: 15, null)
+
                 Toast.makeText(
                     requireContext(),
                     "Successfully getting data",

@@ -86,4 +86,17 @@
     <string name="messages">Messages</string>
     <string name="egg_notification_channel_id">Hello user</string>
     <string name="notification_title">hello</string>
+    <string name="price_130">price : $130</string>
+    <string name="todo">TODO</string>
+    <string name="women_s_clothing">women\'s clothing</string>
+    <string name="electronics">electronics</string>
+    <string name="jewelery">jewelery</string>
+    <string name="men_s_clothing">men\'s clothing</string>
+    <string name="all">All</string>
+    <string name="high_to_low">High To Low</string>
+    <string name="low_to_high">Low To High</string>
+    <string name="more">More</string>
+    <string name="user_details">User Details</string>
+    <string name="user_info">User Information</string>
+
 </resources>

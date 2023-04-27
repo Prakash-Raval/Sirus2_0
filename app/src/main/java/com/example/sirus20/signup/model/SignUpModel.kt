@@ -1,5 +1,9 @@
 package com.example.sirus20.signup.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class SignUpModel(
     var name: String? = "",
     var userName: String? = "",
@@ -14,4 +18,4 @@ data class SignUpModel(
     var image: String? = "",
     var uid: String? = "",
     var token: String? = ""
-)
+) : Parcelable

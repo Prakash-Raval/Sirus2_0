@@ -2,7 +2,6 @@ package com.example.sirus20.signup
 
 import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +18,7 @@ import com.example.sirus20.databinding.FragmentSignUPBinding
 import com.example.sirus20.signup.model.SignUpModel
 import com.example.sirus20.signup.viewmodel.SignUpViewModel
 import com.google.firebase.auth.FirebaseAuth
+import timber.log.Timber
 
 
 class SignUPFragment : BaseFragment() {
@@ -133,6 +133,9 @@ class SignUPFragment : BaseFragment() {
         val userData = SignUpModel()
         val sh = activity?.getSharedPreferences("MySharedPref", MODE_PRIVATE)
 
+        /*
+        * getting data for request class
+        * */
         userData.token = sh?.getString("TOKEN", "")
         userData.name = binding.edtSignUpName.text.toString().trim()
         userData.userName = binding.edtSignUpUserName.text.toString().trim()
@@ -146,6 +149,9 @@ class SignUPFragment : BaseFragment() {
         userData.mobile = binding.edtSignUpUserMobile.text.toString().trim()
         userData.uid = FirebaseAuth.getInstance().uid
 
+        /*
+        * padding data to view model
+        * */
         viewModel.getSignUpData(
             userData
         )
@@ -165,16 +171,16 @@ class SignUPFragment : BaseFragment() {
             when (state) {
                 is ResponseHandler.Loading -> {
                     showProgressDialog()
-                    Log.d("SignUpFragment", "setObserverData: $state")
+                    Timber.d("SignUpFragment setObserverData: $state")
                 }
                 is ResponseHandler.OnFailed -> {
-                    Log.d("SignUpFragment", "setObserverData: $state")
+                    Timber.d("SignUpFragment setObserverData: $state")
                     hideProgressBar()
                     Toast.makeText(requireContext(), "Failed to add data.", Toast.LENGTH_SHORT)
                         .show()
                 }
                 is ResponseHandler.OnSuccessResponse -> {
-                    Log.d("SignUpFragment", "setObserverData: $state")
+                    Timber.d("SignUpFragment setObserverData: $state")
                     hideProgressBar()
                     Toast.makeText(requireContext(), "Register Successfully", Toast.LENGTH_SHORT)
                         .show()
@@ -183,5 +189,4 @@ class SignUPFragment : BaseFragment() {
             }
         })
     }
-
 }
