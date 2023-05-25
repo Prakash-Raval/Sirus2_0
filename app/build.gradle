@@ -18,7 +18,6 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -57,6 +56,27 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test:runner:1.6.0-alpha02'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.0-alpha01'
+    androidTestImplementation 'androidx.test:rules:1.6.0-alpha01'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.0-alpha01'
+    testImplementation 'org.hamcrest:hamcrest-library:1.3'
+    androidTestImplementation ('com.android.support.test:runner:1.0.2'){
+        exclude module: 'support-annotations'
+    }
+   implementation "androidx.tracing:tracing:1.1.0"
+    androidTestImplementation("androidx.fragment:fragment-testing:1.6.0-beta01")
+    implementation("androidx.fragment:fragment-ktx:1.6.0-beta01")
+    androidTestImplementation("androidx.navigation:navigation-testing:2.5.3")
+    // Set this dependency to use JUnit 4 rules
+    androidTestImplementation ('com.android.support.test:rules:1.0.2'){
+        exclude module: 'support-annotations'
+    }
+
+    // Set this dependency to build and run Espresso tests
+    androidTestImplementation ('com.android.support.test.espresso:espresso-core:3.0.2'){
+        exclude module: 'support-annotations'
+    }
 
     //navigation component
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
@@ -83,7 +103,6 @@ dependencies {
 
 
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
-
     implementation("com.tbuonomo:dotsindicator:4.3")
     implementation 'com.hbb20:ccp:2.5.0'
     implementation 'com.google.gms:google-services:4.3.15'

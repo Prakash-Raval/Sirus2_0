@@ -1,5 +1,6 @@
 package com.example.sirus20.chat.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -20,8 +21,10 @@ class ChatListAdapter(
         fun bind(position: Int) {
             binding.data = userList[position]
             binding.root.setOnClickListener {
+                Log.d("TAG12", "${userList[position]}")
                 onChatClick.onClick(
                     userList[position]
+
                 )
 
             }

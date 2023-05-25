@@ -61,6 +61,8 @@ class MessagesFragment : Fragment() {
         * method calls
         * */
         dbReference = FirebaseDatabase.getInstance().reference
+
+        Log.d("TAG3434", "onViewCreated: ${(args?.get("SIGNUPMODEL") as SignUpModel)}")
         setAdapter()
         sendMessage()
         setToolbar()
@@ -144,7 +146,6 @@ class MessagesFragment : Fragment() {
     /*
     * send button click
     * */
-    @SuppressLint("LogNotTimber")
     private fun sendMessage() {
         binding.imgSend.setOnClickListener {
             if (!Validation.isNotNull(binding.edtMessage.text.toString().trim())) {

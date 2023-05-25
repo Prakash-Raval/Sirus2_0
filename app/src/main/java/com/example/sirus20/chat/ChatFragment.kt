@@ -1,6 +1,7 @@
 package com.example.sirus20.chat
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -105,9 +106,10 @@ class ChatFragment : Fragment(), OnChatClick {
     * passing data to bundle
     * */
     override fun onClick(signUpModel: SignUpModel) {
-        val bundle = Bundle()
-        bundle.putParcelable("SIGNUPMODEL",signUpModel)
-        findNavController().navigate(R.id.action_chatFragment_to_messagesFragment, bundle)
+        Timber.d("TAGonClick: $signUpModel")
+        findNavController().navigate(R.id.action_chatFragment_to_messagesFragment, Bundle().apply {
+            putParcelable("SIGNUPMODEL", signUpModel)
+        })
     }
 
     /*

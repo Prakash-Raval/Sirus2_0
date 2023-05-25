@@ -1,7 +1,6 @@
 package com.example.sirus20.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +15,7 @@ import com.example.sirus20.common.ResponseHandler
 import com.example.sirus20.common.Validation
 import com.example.sirus20.databinding.FragmentLoginBinding
 import com.example.sirus20.login.viewmodel.LoginViewModel
+import timber.log.Timber
 
 
 class LoginFragment : BaseFragment() {
@@ -63,12 +63,14 @@ class LoginFragment : BaseFragment() {
     * */
     private fun checkValidation() {
         if (!Validation.isNotNull(binding.edtSignUpName.text.toString().trim())) {
-            showSnackBar(getString(R.string.lbl_enter_email))
+            binding.edtSignUpName.error = getString(R.string.lbl_enter_email)
         } else if (!Validation.isEmailValid(binding.edtSignUpName.text.toString().trim())) {
-            showSnackBar(getString(R.string.lbl_enter_valid_email))
+            binding.edtSignUpName.error = getString(R.string.lbl_enter_valid_email)
         } else if (!Validation.isNotNull(binding.edtLoginPassword.text.toString().trim())) {
-            showSnackBar(getString(R.string.lbl_enter_password))
+            binding.edtLoginPassword.error = getString(R.string.lbl_enter_password)
         } else {
+            binding.edtSignUpName.error = null
+            binding.edtLoginPassword.error = null
             getLoginData()
         }
     }
@@ -105,20 +107,20 @@ class LoginFragment : BaseFragment() {
             when (state) {
                 is ResponseHandler.Loading -> {
                     showProgressDialog()
-                    Log.d("SignUpFragment", "setObserverData: $state")
+                    Timber.d("SignUpFragment: $state")
                 }
                 is ResponseHandler.OnFailed -> {
-                    Log.d("SignUpFragment", "setObserverData: $state")
+                    Timber.d("SignUpFragment: $state")
                     hideProgressBar()
                     Toast.makeText(requireContext(), "Failed to Login.", Toast.LENGTH_SHORT)
                         .show()
                 }
                 is ResponseHandler.OnSuccessResponse -> {
-                    Log.d("SignUpFragment", "setObserverData: $state")
+                    Timber.d("SignUpFragment: $state")
                     hideProgressBar()
                     Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT)
                         .show()
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDashBoardFragment())
+                    findNavController().navigate(R.id.action_loginFragment_to_dashBoardFragment)
                 }
             }
         })
